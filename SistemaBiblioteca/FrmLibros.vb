@@ -1,3 +1,55 @@
-﻿Public Class FrmLibros
+﻿Imports System.Data
+Public Class FrmLibros
+    Private ReadOnly libroDatos As New LibroDatos()
 
+    Private Sub FrmLibros_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CargarLibros()
+    End Sub
+
+    Private Sub CargarLibros()
+        Try
+            Dim tablaLibros As DataTable = libroDatos.ObtenerLibros()
+            dgvLibros.DataSource = tablaLibros
+
+        Catch ex As Exception
+            MessageBox.Show(
+                "No se pudieron cargar los libros." &
+                Environment.NewLine & ex.Message,
+                "Sistema de Biblioteca",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
+
+        End Try
+    End Sub
+
+    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
+
+        Try
+
+            Dim tablaLibros As DataTable = libroDatos.BuscarLibros(txtBuscar.Text)
+            dgvLibros.DataSource = tablaLibros
+
+            If tablaLibros.Rows.Count = 0 Then
+                MessageBox.Show(
+                "No se encontraron libros con ese criterio.",
+                "Búsqueda de libros",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            )
+            End If
+
+        Catch ex As Exception
+
+            MessageBox.Show(
+                "No se pudo realizar la búsqueda." &
+                Environment.NewLine & ex.Message,
+                "Sistema de Biblioteca",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
+
+        End Try
+
+    End Sub
 End Class

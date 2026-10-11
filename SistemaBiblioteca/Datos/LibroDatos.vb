@@ -1,7 +1,20 @@
-﻿Imports MySqlConnector
+﻿
+Imports MySqlConnector
 Imports System.Data
+
 Public Class LibroDatos
+
     Public Function ObtenerLibros() As DataTable
+        Return ObtenerLibrosConFiltro(Nothing)
+    End Function
+
+    Public Function BuscarLibros(textoBusqueda As String) As DataTable
+        Return ObtenerLibrosConFiltro(textoBusqueda)
+    End Function
+
+    Private Function ObtenerLibrosConFiltro(
+        textoBusqueda As String
+    ) As DataTable
 
         Dim tablaLibros As New DataTable()
 
@@ -21,16 +34,33 @@ Public Class LibroDatos
             "INNER JOIN categorias c " &
             "    ON l.id_categoria = c.id_categoria " &
             "WHERE l.esta_activo = TRUE " &
+            "AND ( " &
+            "    @textoBusqueda IS NULL " &
+            "    OR l.titulo LIKE @textoBusqueda " &
+            "    OR l.isbn LIKE @textoBusqueda " &
+            ") " &
             "ORDER BY l.titulo;"
 
-        Using conexion As MySqlConnection = ConexionBaseDatos.ObtenerConexion()
+        Using conexion As MySqlConnection =
+            ConexionBaseDatos.ObtenerConexion()
 
             Using comando As New MySqlCommand(consulta, conexion)
 
+                Dim parametro =
+                    comando.Parameters.Add(
+                        "@textoBusqueda",
+                        MySqlDbType.VarChar,
+                        255
+                    )
+
+                If String.IsNullOrWhiteSpace(textoBusqueda) Then
+                    parametro.Value = DBNull.Value
+                Else
+                    parametro.Value = "%" & textoBusqueda.Trim() & "%"
+                End If
+
                 Using adaptador As New MySqlDataAdapter(comando)
-
                     adaptador.Fill(tablaLibros)
-
                 End Using
 
             End Using
@@ -40,6 +70,5 @@ Public Class LibroDatos
         Return tablaLibros
 
     End Function
-
 
 End Class
