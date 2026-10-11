@@ -33,7 +33,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.SistemaBiblioteca.FrmPrincipal
+            Me.MainForm = Global.SistemaBiblioteca.FrmLibroNuevo
         End Sub
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
