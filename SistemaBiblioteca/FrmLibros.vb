@@ -52,4 +52,14 @@ Public Class FrmLibros
         End Try
 
     End Sub
+
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+        Using formulario As New FrmLibroNuevo()
+            If formulario.ShowDialog(Me) = DialogResult.OK Then
+                CargarLibros()
+
+            End If
+        End Using
+
+    End Sub
 End Class
