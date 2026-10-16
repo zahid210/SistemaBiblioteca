@@ -62,4 +62,36 @@ Public Class FrmLibros
         End Using
 
     End Sub
+
+
+    Private Sub btnEditar_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btnEditar.Click
+
+        If dgvLibros.CurrentRow Is Nothing Then
+            MessageBox.Show(
+                "Selecciona un libro para editar.",
+                "Sistema de Biblioteca",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            )
+            Return
+        End If
+
+        Dim codigoLibro As Integer =
+            Convert.ToInt32(
+                dgvLibros.CurrentRow.Cells("colIdLibro").Value
+            )
+
+        Using formulario As New FrmLibroEditar(codigoLibro)
+
+            If formulario.ShowDialog(Me) = DialogResult.OK Then
+                CargarLibros()
+            End If
+
+        End Using
+
+    End Sub
+
 End Class

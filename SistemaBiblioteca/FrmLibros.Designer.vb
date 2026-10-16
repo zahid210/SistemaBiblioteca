@@ -27,9 +27,6 @@ Partial Class FrmLibros
         lblTitutlo = New Label()
         txtBuscar = New TextBox()
         dgvLibros = New DataGridView()
-        btnNuevo = New Button()
-        btnEditar = New Button()
-        btnDesactivar = New Button()
         colIdLibro = New DataGridViewTextBoxColumn()
         colTitulo = New DataGridViewTextBoxColumn()
         colUbicacion = New DataGridViewTextBoxColumn()
@@ -39,6 +36,9 @@ Partial Class FrmLibros
         colCategoria = New DataGridViewTextBoxColumn()
         colCantidadTotal = New DataGridViewTextBoxColumn()
         colDisponibles = New DataGridViewTextBoxColumn()
+        btnNuevo = New Button()
+        btnEditar = New Button()
+        btnDesactivar = New Button()
         CType(dgvLibros, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -90,33 +90,6 @@ Partial Class FrmLibros
         dgvLibros.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvLibros.Size = New Size(728, 239)
         dgvLibros.TabIndex = 4
-        ' 
-        ' btnNuevo
-        ' 
-        btnNuevo.Location = New Point(695, 366)
-        btnNuevo.Name = "btnNuevo"
-        btnNuevo.Size = New Size(75, 23)
-        btnNuevo.TabIndex = 5
-        btnNuevo.Text = "Nuevo"
-        btnNuevo.UseVisualStyleBackColor = True
-        ' 
-        ' btnEditar
-        ' 
-        btnEditar.Location = New Point(614, 366)
-        btnEditar.Name = "btnEditar"
-        btnEditar.Size = New Size(75, 23)
-        btnEditar.TabIndex = 6
-        btnEditar.Text = "Editar"
-        btnEditar.UseVisualStyleBackColor = True
-        ' 
-        ' btnDesactivar
-        ' 
-        btnDesactivar.Location = New Point(533, 366)
-        btnDesactivar.Name = "btnDesactivar"
-        btnDesactivar.Size = New Size(75, 23)
-        btnDesactivar.TabIndex = 7
-        btnDesactivar.Text = "Desactivar"
-        btnDesactivar.UseVisualStyleBackColor = True
         ' 
         ' colIdLibro
         ' 
@@ -181,6 +154,33 @@ Partial Class FrmLibros
         colDisponibles.HeaderText = "Disponibles"
         colDisponibles.Name = "colDisponibles"
         colDisponibles.ReadOnly = True
+        ' 
+        ' btnNuevo
+        ' 
+        btnNuevo.Location = New Point(695, 366)
+        btnNuevo.Name = "btnNuevo"
+        btnNuevo.Size = New Size(75, 23)
+        btnNuevo.TabIndex = 5
+        btnNuevo.Text = "Nuevo"
+        btnNuevo.UseVisualStyleBackColor = True
+        ' 
+        ' btnEditar
+        ' 
+        btnEditar.Location = New Point(614, 366)
+        btnEditar.Name = "btnEditar"
+        btnEditar.Size = New Size(75, 23)
+        btnEditar.TabIndex = 6
+        btnEditar.Text = "Editar"
+        btnEditar.UseVisualStyleBackColor = True
+        ' 
+        ' btnDesactivar
+        ' 
+        btnDesactivar.Location = New Point(533, 366)
+        btnDesactivar.Name = "btnDesactivar"
+        btnDesactivar.Size = New Size(75, 23)
+        btnDesactivar.TabIndex = 7
+        btnDesactivar.Text = "Desactivar"
+        btnDesactivar.UseVisualStyleBackColor = True
         ' 
         ' FrmLibros
         ' 

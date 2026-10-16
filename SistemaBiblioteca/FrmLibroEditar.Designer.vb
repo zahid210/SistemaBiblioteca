@@ -59,12 +59,16 @@ Partial Class FrmLibroEditar
         ' nudAnio
         ' 
         nudAnio.Location = New Point(31, 257)
+        nudAnio.Maximum = New Decimal(New Integer() {2026, 0, 0, 0})
+        nudAnio.Minimum = New Decimal(New Integer() {1000, 0, 0, 0})
         nudAnio.Name = "nudAnio"
         nudAnio.Size = New Size(79, 23)
         nudAnio.TabIndex = 2
+        nudAnio.Value = New Decimal(New Integer() {1000, 0, 0, 0})
         ' 
         ' cboEditorial
         ' 
+        cboEditorial.DropDownStyle = ComboBoxStyle.DropDownList
         cboEditorial.FormattingEnabled = True
         cboEditorial.Location = New Point(31, 151)
         cboEditorial.Name = "cboEditorial"
@@ -73,6 +77,7 @@ Partial Class FrmLibroEditar
         ' 
         ' cboCategoria
         ' 
+        cboCategoria.DropDownStyle = ComboBoxStyle.DropDownList
         cboCategoria.FormattingEnabled = True
         cboCategoria.Location = New Point(31, 204)
         cboCategoria.Name = "cboCategoria"
@@ -82,9 +87,11 @@ Partial Class FrmLibroEditar
         ' nudCantidad
         ' 
         nudCantidad.Location = New Point(117, 257)
+        nudCantidad.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         nudCantidad.Name = "nudCantidad"
         nudCantidad.Size = New Size(71, 23)
         nudCantidad.TabIndex = 5
+        nudCantidad.Value = New Decimal(New Integer() {1, 0, 0, 0})
         ' 
         ' txtUbicacion
         ' 

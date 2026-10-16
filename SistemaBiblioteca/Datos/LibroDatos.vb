@@ -132,7 +132,7 @@ Public Class LibroDatos
 
     Public Function ObtenerLibroPorId(idLibro As Integer) As DataTable
 
-        Dim tablaLibro As DataTable()
+        Dim tablaLibro As New DataTable()
 
         Dim consulta As String =
         "SELECT id_libro, id_editorial, id_categoria, " &
@@ -155,8 +155,9 @@ Public Class LibroDatos
 
             End Using
 
+        End Using
 
-
+        Return tablaLibro
 
 
     End Function
