@@ -84,4 +84,93 @@ Public Class FrmLibroEditar
 
     End Sub
 
+
+    Private Sub btnGuardar_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btnGuardar.Click
+
+        If String.IsNullOrWhiteSpace(txtTitulo.Text) Then
+            MessageBox.Show("Ingresa el título del libro.")
+            txtTitulo.Focus()
+            Return
+        End If
+
+        If cboEditorial.SelectedIndex = -1 Then
+            MessageBox.Show("Selecciona una editorial.")
+            cboEditorial.Focus()
+            Return
+        End If
+
+        If cboCategoria.SelectedIndex = -1 Then
+            MessageBox.Show("Selecciona una categoría.")
+            cboCategoria.Focus()
+            Return
+        End If
+
+        Dim libro As New Libro With {
+            .IdEditorial = CInt(cboEditorial.SelectedValue),
+            .IdCategoria = CInt(cboCategoria.SelectedValue),
+            .Titulo = txtTitulo.Text.Trim(),
+            .Isbn = txtIsbn.Text.Trim(),
+            .AnioPublicacion = CInt(nudAnio.Value),
+            .CantidadTotal = CInt(nudCantidad.Value),
+            .Ubicacion = txtUbicacion.Text.Trim()
+        }
+
+        Try
+            If libroDatos.ActualizarLibro(idLibro, libro) Then
+
+                MessageBox.Show(
+                    "El libro se actualizó correctamente.",
+                    "Sistema de Biblioteca",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                )
+
+                Me.DialogResult = DialogResult.OK
+                Me.Close()
+
+            Else
+                MessageBox.Show(
+                    "No se actualizaron los datos. Comprueba que el libro siga activo " &
+                    "y que la cantidad total no sea inferior a la cantidad disponible.",
+                    "Sistema de Biblioteca",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                )
+            End If
+
+        Catch ex As MySqlConnector.MySqlException
+            MessageBox.Show(
+                "Error al actualizar el libro." &
+                Environment.NewLine & ex.Message,
+                "Sistema de Biblioteca",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
+
+        Catch ex As Exception
+            MessageBox.Show(
+                "Ocurrió un error inesperado." &
+                Environment.NewLine & ex.Message,
+                "Sistema de Biblioteca",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
+        End Try
+
+    End Sub
+
+
+    Private Sub btnCancelar_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btnCancelar.Click
+
+        Me.DialogResult = DialogResult.Cancel
+        Me.Close()
+
+    End Sub
+
 End Class

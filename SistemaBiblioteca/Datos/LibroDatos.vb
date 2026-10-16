@@ -163,4 +163,68 @@ Public Class LibroDatos
     End Function
 
 
+    Public Function ActualizarLibro(
+    idLibro As Integer,
+    libro As Libro
+    ) As Boolean
+
+        Dim consulta As String =
+        "UPDATE libros SET " &
+        "id_editorial = @idEditorial, " &
+        "id_categoria = @idCategoria, " &
+        "titulo = @titulo, " &
+        "isbn = @isbn, " &
+        "anio_publicacion = @anioPublicacion, " &
+        "cantidad_total = @cantidadTotal, " &
+        "ubicacion = @ubicacion " &
+        "WHERE id_libro = @idLibro " &
+        "AND esta_activo = TRUE " &
+        "AND @cantidadTotal >= cantidad_disponible;"
+
+        Using conexion As MySqlConnector.MySqlConnection =
+        ConexionBaseDatos.ObtenerConexion()
+
+            Using comando As New MySqlConnector.MySqlCommand(
+            consulta, conexion)
+
+                comando.Parameters.AddWithValue(
+                "@idEditorial", libro.IdEditorial)
+
+                comando.Parameters.AddWithValue(
+                "@idCategoria", libro.IdCategoria)
+
+                comando.Parameters.AddWithValue(
+                "@titulo", libro.Titulo.Trim())
+
+                comando.Parameters.AddWithValue(
+                "@isbn",
+                If(String.IsNullOrWhiteSpace(libro.Isbn),
+                   CType(DBNull.Value, Object),
+                   libro.Isbn.Trim()))
+
+                comando.Parameters.AddWithValue(
+                "@anioPublicacion", libro.AnioPublicacion)
+
+                comando.Parameters.AddWithValue(
+                "@cantidadTotal", libro.CantidadTotal)
+
+                comando.Parameters.AddWithValue(
+                "@ubicacion",
+                If(String.IsNullOrWhiteSpace(libro.Ubicacion),
+                   CType(DBNull.Value, Object),
+                   libro.Ubicacion.Trim()))
+
+                comando.Parameters.AddWithValue("@idLibro", idLibro)
+
+                conexion.Open()
+
+                Return comando.ExecuteNonQuery() > 0
+
+            End Using
+
+        End Using
+
+    End Function
+
+
 End Class
