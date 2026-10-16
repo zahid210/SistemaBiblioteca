@@ -124,6 +124,7 @@ Partial Class FrmLibros
         colIdLibro.HeaderText = "Código"
         colIdLibro.Name = "colIdLibro"
         colIdLibro.ReadOnly = True
+        colIdLibro.Visible = False
         ' 
         ' colTitulo
         ' 

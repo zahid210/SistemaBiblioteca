@@ -130,6 +130,36 @@ Public Class LibroDatos
 
     End Function
 
+    Public Function ObtenerLibroPorId(idLibro As Integer) As DataTable
+
+        Dim tablaLibro As DataTable()
+
+        Dim consulta As String =
+        "SELECT id_libro, id_editorial, id_categoria, " &
+        "titulo, isbn, anio_publicacion, cantidad_total, " &
+        "cantidad_disponible, ubicacion " &
+        "FROM libros " &
+        "WHERE id_libro = @idLibro AND esta_activo = TRUE;"
+
+        Using conexion As MySqlConnector.MySqlConnection =
+        ConexionBaseDatos.ObtenerConexion()
+
+            Using comando As New MySqlConnector.MySqlCommand(
+                consulta, conexion)
+
+                comando.Parameters.AddWithValue("@idLibro", idLibro)
+
+                Using adaptador As New MySqlConnector.MySqlDataAdapter(comando)
+                    adaptador.Fill(tablaLibro)
+                End Using
+
+            End Using
+
+
+
+
+
+    End Function
 
 
 End Class
