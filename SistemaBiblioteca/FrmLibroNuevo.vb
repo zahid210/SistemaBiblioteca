@@ -6,8 +6,6 @@ Public Class FrmLibroNuevo
     Private Sub FrmLibroNuevo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CargarCategorias()
         CargarEditoriales()
-
-
     End Sub
 
     Private Sub CargarEditoriales()
