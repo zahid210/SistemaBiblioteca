@@ -26,6 +26,7 @@ Public Class LibroDatos
             "    l.anio_publicacion, " &
             "    l.cantidad_total, " &
             "    l.cantidad_disponible, " &
+            "    l.ubicacion, " &
             "    e.nombre AS nombre_editorial, " &
             "    c.nombre AS nombre_categoria " &
             "FROM libros l " &
