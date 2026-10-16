@@ -71,4 +71,64 @@ Public Class LibroDatos
 
     End Function
 
+    Public Function RegistrarLibro(libro As Libro) As Boolean
+        Dim consulta As String =
+        "INSERT INTO libros " &
+        "(id_editorial, id_categoria, titulo, isbn, " &
+        "anio_publicacion, cantidad_total, cantidad_disponible, " &
+        "ubicacion, esta_activo) " &
+        "VALUES " &
+        "(@idEditorial, @idCategoria, @titulo, @isbn, " &
+        "@anioPublicacion, @cantidadTotal, @cantidadDisponible, " &
+        "@ubicacion, TRUE);"
+
+        Using conexion As MySqlConnector.MySqlConnection =
+       ConexionBaseDatos.ObtenerConexion()
+
+            Using comando As New MySqlConnector.MySqlCommand(
+                consulta, conexion)
+
+                comando.Parameters.AddWithValue(
+                    "@idEditorial", libro.IdEditorial)
+
+                comando.Parameters.AddWithValue(
+                    "@idCategoria", libro.IdCategoria)
+
+                comando.Parameters.AddWithValue(
+                    "@titulo", libro.Titulo.Trim())
+
+                comando.Parameters.AddWithValue(
+                    "@isbn",
+                    If(String.IsNullOrWhiteSpace(libro.Isbn),
+                       CType(DBNull.Value, Object),
+                       libro.Isbn.Trim()))
+
+                comando.Parameters.AddWithValue(
+                    "@anioPublicacion", libro.AnioPublicacion)
+
+                comando.Parameters.AddWithValue(
+                    "@cantidadTotal", libro.CantidadTotal)
+
+                comando.Parameters.AddWithValue(
+                    "@cantidadDisponible", libro.CantidadTotal)
+
+                comando.Parameters.AddWithValue(
+                    "@ubicacion",
+                    If(String.IsNullOrWhiteSpace(libro.Ubicacion),
+                       CType(DBNull.Value, Object),
+                       libro.Ubicacion.Trim()))
+
+                conexion.Open()
+
+                Return comando.ExecuteNonQuery() = 1
+
+            End Using
+
+        End Using
+
+
+    End Function
+
+
+
 End Class
